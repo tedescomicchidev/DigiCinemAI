@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  servicebus:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    ports:
+      - "5672:5672"
+      - "5760:5760"
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    command: azurite --blobHost 0.0.0.0
+    ports:
+      - "10000:10000"
+  pitch-agent:
+    build:
+      context: .
+      dockerfile: services/PitchAgent/Dockerfile
+    environment:
+      SERVICEBUS__CONNECTION: Endpoint=sb://servicebus.local/
+      AZURE_OPENAI__ENDPOINT: http://openai
+      AZURE_OPENAI__KEY: dev
+    depends_on:
+      - servicebus
+  editor-portal:
+    build:
+      context: .
+      dockerfile: apps/editor-portal/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:8080
