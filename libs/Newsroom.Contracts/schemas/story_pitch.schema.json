@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/story_pitch.schema.json",
+  "title": "StoryPitch",
+  "type": "object",
+  "properties": {
+    "storyId": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": ["value"]
+    },
+    "slug": { "type": "string" },
+    "headlineIdea": { "type": "string" },
+    "angle": { "type": "string" },
+    "beat": { "type": "string" },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "embargoUntil": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "rationale": { "type": ["string", "null"] },
+    "priority": { "type": "integer", "minimum": 0 }
+  },
+  "required": [
+    "storyId",
+    "slug",
+    "headlineIdea",
+    "angle",
+    "beat",
+    "keywords",
+    "sources",
+    "priority"
+  ]
+}
