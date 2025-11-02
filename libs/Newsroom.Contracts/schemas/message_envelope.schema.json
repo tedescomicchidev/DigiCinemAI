@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/message_envelope.schema.json",
+  "title": "MessageEnvelope",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "type": { "type": "string" },
+    "role": { "type": "string" },
+    "correlationId": { "type": "string" },
+    "priority": { "type": "integer" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "payload": { }
+  },
+  "required": ["id", "type", "role", "correlationId", "priority", "createdAt", "payload"]
+}
